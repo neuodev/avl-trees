@@ -54,6 +54,20 @@ class AVLTree {
       }
     }
   }
+  _leftRotate(root) {
+    let newRoot = root.right;
+    root.right = newRoot.left;
+    newRoot.left = root;
+
+    // reset the hight
+    this.setHeight(root);
+    this.setHeight(newRoot);
+    return newRoot;
+  }
+
+  setHeight(node) {
+    node.height = Math.max(this.height(node.right), this.height(node.left)) + 1;
+  }
 
   isLeftHeavy(node: Leaf) {
     return this.balanceFactor(node) > 1;
