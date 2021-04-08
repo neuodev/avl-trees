@@ -30,12 +30,24 @@ class AVLTree {
     // calc the height max(left ,right) + 1
     node.height = Math.max(this.height(node.right), this.height(node.left)) + 1;
 
-    const balanceFactor = this.height(node.left) - this.height(node.right);
-    if (Math.abs(balanceFactor) <= 1) {
-      console.log(node);
+    const balanceFactor = this.balanceFactor(node);
+    if (this.isLeftHeavy(node)) {
+      console.log('Left Heavy');
     }
-
+    if (this.isRightHeavy(node)) {
+      console.log('Right heavy');
+    }
     return node;
+  }
+
+  isLeftHeavy(node: Leaf) {
+    return this.balanceFactor(node) > 1;
+  }
+  isRightHeavy(node: Leaf) {
+    return this.balanceFactor(node) < -1;
+  }
+  balanceFactor(node: Leaf) {
+    return node === null ? 0 : this.height(node.left) - this.height(node.right);
   }
 
   height(node) {
@@ -44,8 +56,8 @@ class AVLTree {
 }
 
 let avlTree = new AVLTree();
+avlTree.insert(30);
+avlTree.insert(20);
 avlTree.insert(1);
-avlTree.insert(2);
-avlTree.insert(-1);
 
 console.log(avlTree);
