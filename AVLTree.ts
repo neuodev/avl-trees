@@ -65,6 +65,15 @@ class AVLTree {
     return newRoot;
   }
 
+  _rotateRight(root) {
+    let newRoot = root.left;
+    root.left = newRoot.right;
+    newRoot.right = root;
+    this.setHeight(root);
+    this.setHeight(newRoot);
+    return newRoot;
+  }
+
   setHeight(node) {
     node.height = Math.max(this.height(node.right), this.height(node.left)) + 1;
   }
