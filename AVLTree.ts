@@ -35,7 +35,14 @@ class AVLTree {
       console.log('Left Heavy');
     }
     if (this.isRightHeavy(node)) {
-      console.log('Right heavy');
+      const BF = this.balanceFactor(node.right);
+      if (BF > 0) {
+        console.log(
+          `rightRotate(${node.right.val}) -> leftRotate(${node.val})`
+        );
+      } else {
+        console.log(`leftRotate(${node.right.val})`);
+      }
     }
     return node;
   }
@@ -56,8 +63,8 @@ class AVLTree {
 }
 
 let avlTree = new AVLTree();
+avlTree.insert(10);
 avlTree.insert(30);
 avlTree.insert(20);
-avlTree.insert(1);
 
 console.log(avlTree);
