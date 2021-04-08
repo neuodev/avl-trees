@@ -29,6 +29,12 @@ class AVLTree {
     }
     // calc the height max(left ,right) + 1
     node.height = Math.max(this.height(node.right), this.height(node.left)) + 1;
+
+    const balanceFactor = this.height(node.left) - this.height(node.right);
+    if (Math.abs(balanceFactor) <= 1) {
+      console.log(node);
+    }
+
     return node;
   }
 
