@@ -30,18 +30,22 @@ class AVLTree {
     // calc the height max(left ,right) + 1
     node.height = Math.max(this.height(node.right), this.height(node.left)) + 1;
 
-    const balanceFactor = this.balanceFactor(node);
     this.balance(node);
     return node;
   }
 
   balance(node: Leaf) {
     if (this.isLeftHeavy(node)) {
-      console.log('Left Heavy');
+      if (this.balanceFactor(node.left) > 0) {
+        console.log(`LeftRotation(${node.left.val})`);
+      } else {
+        console.log(
+          `LeftRotaion(${node.left.val}) -> rightRotate(${node.val})`
+        );
+      }
     }
     if (this.isRightHeavy(node)) {
-      const BF = this.balanceFactor(node.right);
-      if (BF > 0) {
+      if (this.balanceFactor(node.right) > 0) {
         console.log(
           `rightRotate(${node.right.val}) -> leftRotate(${node.val})`
         );
